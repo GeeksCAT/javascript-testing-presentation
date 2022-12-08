@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from 'cors';
+import { usersData } from "./data/users";
 
 const app = express();
 const port = 8080;
@@ -16,9 +17,10 @@ const io = new Server(httpServer, {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
+
+    usersData(socket);
+
+    // socket.broadcast.emit('users', ['test']);
 });
 
 app.use(cors());

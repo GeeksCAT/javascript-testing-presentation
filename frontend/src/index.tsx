@@ -6,13 +6,16 @@ import { RouterProvider } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
 import { AuthProvider } from './contexts/Auth'
 import router from './routes/root'
+import { DataProvider } from './contexts/Data'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <DataProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </DataProvider>
   </React.StrictMode>,
 )
 
