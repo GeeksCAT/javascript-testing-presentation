@@ -7,12 +7,24 @@ import ErrorPage from './pages/error'
 import Signin from './pages/signin'
 import reportWebVitals from './reportWebVitals'
 import Root from './routes/root'
+import { AuthProvider } from './contexts/Auth'
+import ProtectedRoute from './components/ProtectedRouter'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '',
+        element: (
+          <ProtectedRoute>
+            <div>main</div>
+          </ProtectedRoute>
+        ),
+      },
+    ],
   },
   {
     path: '/signin',
@@ -23,7 +35,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )
 
