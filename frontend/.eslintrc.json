@@ -1,0 +1,9 @@
+{
+  "extends": ["@rocketseat/eslint-config/react"],
+  "plugins": [
+    "eslint-plugin-import-helpers"
+  ],
+  "globals": {
+    "JSX": "readonly"
+  }
+}
