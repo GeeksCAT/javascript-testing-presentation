@@ -1,36 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
 
-import ErrorPage from './pages/error'
-import Signin from './pages/signin'
 import reportWebVitals from './reportWebVitals'
-import Root from './routes/root'
 import { AuthProvider } from './contexts/Auth'
-import ProtectedRoute from './components/ProtectedRouter'
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '',
-        element: (
-          <ProtectedRoute>
-            <div>main</div>
-          </ProtectedRoute>
-        ),
-      },
-    ],
-  },
-  {
-    path: '/signin',
-    element: <Signin />,
-  },
-])
+import router from './routes/root'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
