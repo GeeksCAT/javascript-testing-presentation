@@ -3,6 +3,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from 'cors';
 import { usersData } from "./data/users";
+import { next } from "./data/questions";
 
 const app = express();
 const port = 8080;
@@ -26,6 +27,13 @@ io.on('connection', (socket) => {
 app.use(cors());
 app.get("/", (req, res) => {
     res.send("Hello world!");
+});
+
+app.get("/next/:id", (req, res) => {
+    const question = next();
+    io.emit("question", question);
+
+    res.json(question);
 });
 
 httpServer.listen(port, () => {
