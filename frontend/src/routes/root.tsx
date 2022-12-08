@@ -1,24 +1,29 @@
-import { Link, Outlet } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
+import ProtectedRoute from '../components/ProtectedRouter'
+import Main from '../layout/Main'
+import ErrorPage from '../pages/error'
+import Signin from '../pages/signin'
 
-export default function Root() {
-  return (
-    <>
-      <div id="header">
-        <h1>JS Testing</h1>
-        <nav>
-          <ul>
-            <li>
-              <Link to={`contacts/1`}>Your Name</Link>
-            </li>
-            <li>
-              <Link to={`contacts/2`}>Your Friend</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div>
-        <Outlet />
-      </div>
-    </>
-  )
-}
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Main />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '',
+        element: (
+          <ProtectedRoute>
+            <div>main</div>
+          </ProtectedRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: '/signin',
+    element: <Signin />,
+  },
+])
+
+export default router
