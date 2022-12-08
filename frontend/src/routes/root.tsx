@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom'
 import ProtectedRoute from '../components/ProtectedRouter'
-import Question from '../components/Question'
 import UnProtectedRoute from '../components/UnProtectedRouter'
 import Main from '../layout/Main'
 import ErrorPage from '../pages/error'
+import Questions from '../pages/questions'
 import Signin from '../pages/signin'
 
 const router = createBrowserRouter([
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         path: '',
         element: (
           <ProtectedRoute>
-            <Question />
+            <Questions />
           </ProtectedRoute>
         ),
       },
