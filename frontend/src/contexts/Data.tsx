@@ -17,12 +17,17 @@ export interface CurrentAnswers {
   [answerId: string]: number
 }
 
+export interface Results {
+  results: CurrentAnswers
+  totalVotes: number
+}
+
 export interface DataContextType {
   users: string[]
   addUser: (user: string) => void
   question: Question | null
   sendAnswer: (answerId: number, username: string) => void
-  currentAnswers: CurrentAnswers
+  currentAnswers: Results
 }
 
 export const DataContext = createContext<DataContextType>({
@@ -30,14 +35,20 @@ export const DataContext = createContext<DataContextType>({
   addUser: () => {},
   question: null,
   sendAnswer: () => {},
-  currentAnswers: {},
+  currentAnswers: {
+    results: {},
+    totalVotes: 0,
+  },
 })
 
 export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const socket = useRef<Socket>()
   const [users, setUsers] = useState<string[]>([])
   const [question, setQuestion] = useState<Question | null>(null)
-  const [currentAnswers, setCurrentAnswers] = useState<CurrentAnswers>({})
+  const [currentAnswers, setCurrentAnswers] = useState<Results>({
+    results: {},
+    totalVotes: 0,
+  })
 
   useEffect(() => {
     console.log('data provider')
@@ -52,8 +63,9 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
       setQuestion(question)
     })
 
-    socket.current.on('currentAnswers', (d: any) => {
-      setCurrentAnswers(d)
+    socket.current.on('currentAnswers', (r: Results) => {
+      console.log(r)
+      setCurrentAnswers(r)
     })
 
     return () => {
