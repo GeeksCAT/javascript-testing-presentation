@@ -3,7 +3,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from 'cors';
 import { usersData } from "./data/users";
-import { next } from "./data/questions";
+import { next, questionsData } from "./data/questions";
 
 const app = express();
 const port = 8080;
@@ -20,6 +20,7 @@ io.on('connection', (socket) => {
     console.log('a user connected');
 
     usersData(socket);
+    questionsData(socket);
 
     // socket.broadcast.emit('users', ['test']);
 });

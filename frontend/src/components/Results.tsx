@@ -31,8 +31,6 @@ export default function Results() {
   const { currentAnswers } = useData()
 
   const calculatePercentage = (count: number): string => {
-    console.log(currentAnswers)
-    console.log(Math.trunc((count / currentAnswers.totalVotes) * 100) + '%')
     return Math.trunc((count / currentAnswers.totalVotes) * 100) + '%'
   }
 
