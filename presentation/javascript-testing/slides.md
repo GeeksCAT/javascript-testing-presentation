@@ -3,13 +3,13 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/collection/94734566/1920x1080
+background: https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80
 # apply any windi css classes to the current slide
 class: 'text-center'
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
 # show line numbers in code blocks
-lineNumbers: false
+lineNumbers: true
 # some information about the slides, markdown enabled
 info: |
   ## Slidev Starter Template
@@ -23,7 +23,7 @@ drawings:
 css: unocss
 ---
 
-# Welcome to Slidev
+# Javascript Testing
 
 Presentation slides for developers
 
@@ -95,7 +95,7 @@ hide: false
 ---
 title: Iframe connected to frontend app
 layout: iframe-right
-url: http://localhost:3000
+url: http://localhost:3000/presentation/2
 ---
 
 

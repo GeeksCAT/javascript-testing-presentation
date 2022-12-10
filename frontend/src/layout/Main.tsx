@@ -19,6 +19,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 0 20px;
 `
 
 const UsersButton = styled.button`

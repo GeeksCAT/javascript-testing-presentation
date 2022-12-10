@@ -18,15 +18,12 @@ export const questionsData = (socket: Socket) => {
     });
 }
 
-export const next = (): Question => {
-    currentQuestion++;
-    if (currentQuestion >= questions.length) {
-        currentQuestion = 0;
-    }
+export const setQuestion = (id: number): Question => {
+    const question = questions.find(q => q.id === id);
+    if(!question) return null;
 
     currentAnswers = {};
-
-    return questions[currentQuestion];
+    return question;
 }
 
 /**

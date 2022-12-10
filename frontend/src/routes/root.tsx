@@ -3,8 +3,10 @@ import ProtectedRoute from '../components/ProtectedRouter'
 import UnProtectedRoute from '../components/UnProtectedRouter'
 import Main from '../layout/Main'
 import ErrorPage from '../pages/error'
+import Presentation from '../pages/presentation'
 import Questions from '../pages/questions'
 import Signin from '../pages/signin'
+import questionLoader from './loaders/question.loader'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,11 @@ const router = createBrowserRouter([
             <Questions />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: 'presentation/:questionId',
+        element: <Presentation />,
+        loader: questionLoader,
       },
     ],
   },

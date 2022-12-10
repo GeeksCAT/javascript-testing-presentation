@@ -3,7 +3,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from 'cors';
 import { usersData } from "./data/users";
-import { next, questionsData } from "./data/questions";
+import { questionsData, setQuestion } from "./data/questions";
 
 const app = express();
 const port = 8080;
@@ -30,8 +30,8 @@ app.get("/", (req, res) => {
     res.send("Hello world!");
 });
 
-app.get("/next/:id", (req, res) => {
-    const question = next();
+app.get("/set/:id", (req, res) => {
+    const question = setQuestion(+req.params.id);
     io.emit("question", question);
 
     res.json(question);
