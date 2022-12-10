@@ -3,7 +3,8 @@ import { questions, Question } from "../questions";
 
 let currentQuestion = 0;
 
-let currentAnswers: Record<string, string[]> = {};
+type CurrentAnswers = Record<string, string[]>;
+let currentAnswers: CurrentAnswers = {};
 
 export const questionsData = (socket: Socket) => {
     socket.on('answer', (data: { username: string, answerId: number }) => {
@@ -11,14 +12,9 @@ export const questionsData = (socket: Socket) => {
         currentAnswers[data.answerId] = [data.username, ...answers];
 
         socket.broadcast.emit('currentAnswers', { 
-            results: Object.keys(currentAnswers).reduce((acc, key) => {
-                acc[key] = currentAnswers[key].length;
-                return acc;
-            }, {} as Record<string, number>), 
-            totalVotes: Object.keys(currentAnswers).reduce((acc, key) => {
-                return acc + currentAnswers[key].length;
-            }, 0)
-        });1
+            results: calcResults(currentAnswers), 
+            totalVotes: calcTotalVotes(currentAnswers)
+        });
     });
 }
 
@@ -31,4 +27,29 @@ export const next = (): Question => {
     currentAnswers = {};
 
     return questions[currentQuestion];
+}
+
+/**
+ * Calculates the total number of votes
+ * 
+ * @param ca current answers
+ * @returns total number of votes
+ */
+export const calcTotalVotes = (ca: CurrentAnswers) => {
+    return Object.keys(ca).reduce((acc, key) => {
+        return acc + ca[key].length;
+    }, 0);
+}
+
+/**
+ * Calculates the number of votes per answer
+ * 
+ * @param ca current answers
+ * @returns object with the number of votes per answer
+ */
+export const calcResults = (ca: CurrentAnswers) => {
+    return Object.keys(ca).reduce((acc, key) => {
+        acc[key] = ca[key].length;
+        return acc;
+    }, {} as Record<string, number>);
 }
