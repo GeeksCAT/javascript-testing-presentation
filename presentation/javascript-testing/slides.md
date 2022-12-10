@@ -88,6 +88,11 @@ Here is another comment.
 -->
 
 ---
+src: ./pages/jest.md
+hide: false
+---
+
+---
 title: Iframe connected to frontend app
 layout: iframe-right
 url: http://localhost:3000
