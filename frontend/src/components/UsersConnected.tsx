@@ -11,7 +11,7 @@ const List = styled.div`
   padding: 1rem;
 `
 
-const UserAvatar = styled.span`
+export const UserAvatar = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +29,7 @@ const UserAvatar = styled.span`
   }
 `
 
-const UserAvatarImage = styled.img`
+export const UserAvatarImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;

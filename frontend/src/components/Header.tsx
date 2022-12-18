@@ -5,7 +5,7 @@ const HeaderContent = styled('header')`
   padding: 1rem;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 1px gray;
+  border-bottom: 1px solid black;
 `
 
 export default function Header(): JSX.Element {

@@ -3,6 +3,7 @@ import { Socket } from "socket.io";
 interface User {
     id: string;
     name: string;
+    points: number;
 }
 
 const users: User[] = [];
@@ -19,6 +20,7 @@ export const usersData = (socket: Socket) => {
         users.push({
             id: socket.id,
             name: data,
+            points: 0
         });
         socket.broadcast.emit('users', users.map(u => u.name));
     });

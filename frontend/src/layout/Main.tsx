@@ -16,10 +16,7 @@ const MainContent = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100%;
-  padding: 0 20px;
 `
 
 const UsersButton = styled.button`

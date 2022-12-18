@@ -7,6 +7,7 @@ import Presentation from '../pages/presentation'
 import Questions from '../pages/questions'
 import Signin from '../pages/signin'
 import questionLoader from './loaders/question.loader'
+import Ranking from '../pages/ranking'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         path: 'presentation/:questionId',
         element: <Presentation />,
         loader: questionLoader,
+      },
+      {
+        path: 'ranking',
+        element: <Ranking />,
       },
     ],
   },
