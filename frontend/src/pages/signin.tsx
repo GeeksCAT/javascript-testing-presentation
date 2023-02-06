@@ -30,7 +30,7 @@ export default function Signin() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <Button disabled={!username}>Enter</Button>
+        <Button disabled={!username}>Accedir</Button>
       </form>
     </SigninContent>
   )
