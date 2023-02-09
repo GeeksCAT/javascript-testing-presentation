@@ -69,7 +69,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
     })
 
     return () => {
-      // socket.current?.disconnect()
+      socket.current?.disconnect()
     }
   }, [])
 
