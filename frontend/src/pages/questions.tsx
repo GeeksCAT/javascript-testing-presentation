@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import Question from '../components/Question'
@@ -12,9 +12,13 @@ const QuestionsContainer = styled.div`
 `
 
 export default function Questions() {
-  const { sendAnswer, results: votes } = useData()
+  const { sendAnswer, results: votes, question } = useData()
   const { user } = useAuth()
   const [answered, setAnswered] = useState(false)
+
+  useEffect(() => {
+    setAnswered(false)
+  }, [question])
 
   const onAnswer = (answerId: number) => {
     sendAnswer(answerId, user!)
