@@ -1,5 +1,5 @@
 {
-  "extends": ["@rocketseat/eslint-config/react"],
+  "extends": [],
   "plugins": [
     "eslint-plugin-import-helpers"
   ],

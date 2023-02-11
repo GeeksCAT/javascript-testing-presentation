@@ -16,7 +16,7 @@ export default function Presentation() {
           <div key={answer.id}>{answer.text}</div>
         ))}
       </div>
-      <Results />
+      {/*<Results />*/}
     </div>
   )
 }

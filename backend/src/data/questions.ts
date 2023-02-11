@@ -1,4 +1,4 @@
-import { Socket } from "socket.io";
+import { Socket, Server } from "socket.io";
 import { questions, Question } from "../questions";
 
 let currentQuestion = 0;
@@ -6,12 +6,12 @@ let currentQuestion = 0;
 type CurrentAnswers = Record<string, string[]>;
 let currentAnswers: CurrentAnswers = {};
 
-export const questionsData = (socket: Socket) => {
+export const questionsData = (socket: Socket, io: Server) => {
     socket.on('answer', (data: { username: string, answerId: number }) => {
         const answers = currentAnswers[data.answerId] ?? [];
         currentAnswers[data.answerId] = [data.username, ...answers];
 
-        socket.broadcast.emit('currentAnswers', { 
+        io.emit('results', { 
             results: calcResults(currentAnswers), 
             totalVotes: calcTotalVotes(currentAnswers)
         });
@@ -22,7 +22,10 @@ export const setQuestion = (id: number): Question => {
     const question = questions.find(q => q.id === id);
     if(!question) return null;
 
-    currentAnswers = {};
+    currentAnswers = question.answers.reduce((acc, answer) => {
+        acc[answer.id] = [];
+        return acc;
+    }, {} as CurrentAnswers);
     return question;
 }
 

@@ -27,7 +27,7 @@ export interface DataContextType {
   addUser: (user: string) => void
   question: Question | null
   sendAnswer: (answerId: number, username: string) => void
-  currentAnswers: Results
+  results: Results
 }
 
 export const DataContext = createContext<DataContextType>({
@@ -35,7 +35,7 @@ export const DataContext = createContext<DataContextType>({
   addUser: () => {},
   question: null,
   sendAnswer: () => {},
-  currentAnswers: {
+  results: {
     results: {},
     totalVotes: 0,
   },
@@ -45,7 +45,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const socket = useRef<Socket>()
   const [users, setUsers] = useState<string[]>([])
   const [question, setQuestion] = useState<Question | null>(null)
-  const [currentAnswers, setCurrentAnswers] = useState<Results>({
+  const [results, setResults] = useState<Results>({
     results: {},
     totalVotes: 0,
   })
@@ -63,9 +63,9 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
       setQuestion(question)
     })
 
-    socket.current.on('currentAnswers', (r: Results) => {
+    socket.current.on('results', (r: Results) => {
       console.log(r)
-      setCurrentAnswers(r)
+      setResults(r)
     })
 
     return () => {
@@ -84,7 +84,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <DataContext.Provider
-      value={{ users, addUser, question, sendAnswer, currentAnswers }}
+      value={{ users, addUser, question, sendAnswer, results }}
     >
       {children}
     </DataContext.Provider>

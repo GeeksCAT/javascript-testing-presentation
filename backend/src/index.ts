@@ -19,8 +19,8 @@ const io = new Server(httpServer, {
 io.on('connection', (socket) => {
     console.log('a user connected');
 
-    usersData(socket);
-    questionsData(socket);
+    usersData(socket, io);
+    questionsData(socket, io);
 
     // socket.broadcast.emit('users', ['test']);
 });

@@ -1,4 +1,4 @@
-import { Socket } from "socket.io";
+import { Server, Socket } from "socket.io";
 
 interface User {
     id: string;
@@ -8,12 +8,12 @@ interface User {
 
 const users: User[] = [];
 
-export const usersData = (socket: Socket) => {
+export const usersData = (socket: Socket, io: Server) => {
 
     socket.on('disconnect', () => {
         console.log('user disconnected');
         users.splice(users.findIndex((user) => user.id === socket.id), 1);
-        socket.broadcast.emit('users', users.map(u => u.name));
+        io.emit('users', users.map(u => u.name));
     });
 
     socket.on('login', (data: any) => {
@@ -22,6 +22,6 @@ export const usersData = (socket: Socket) => {
             name: data,
             points: 0
         });
-        socket.broadcast.emit('users', users.map(u => u.name));
+        io.emit('users', users.map(u => u.name));
     });
 }
