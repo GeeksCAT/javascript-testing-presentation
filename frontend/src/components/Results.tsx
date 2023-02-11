@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import styled from 'styled-components'
 
 import { useData } from '../hooks/use-data'
@@ -31,26 +32,17 @@ const ResultVotes = styled.span`
   font-weight: 600;
 `
 
-const example = [
-  { value: 50, },
-  { value: 100, },
-  { value: 78, },
-  { value: 2, },
-  { value: 69, },
-]
-
-export interface ResultsProps {
-  results: { value: number; votes: number }[]
+const calculatePercentage = (count: number, total: number): number => {
+  return Math.trunc((count / total) * 100)
 }
 
-export default function Results({ results } : ResultsProps) {
-  /*
-  const { currentAnswers } = useData()
+export default function Results() {
+  const { results: votes } = useData()
 
-  const calculatePercentage = (count: number): string => {
-    return Math.trunc((count / currentAnswers.totalVotes) * 100) + '%'
-  }
-  */
+  const results = useMemo(() => Object.entries(votes.results).map(([id, v]) => ({
+    value: calculatePercentage(v, votes.totalVotes),
+    votes: v,
+  })), [votes.results])
 
   return <ResultsContent> {results.map((r, i) => 
     <Result key={i}>
